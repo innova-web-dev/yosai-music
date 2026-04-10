@@ -1,35 +1,14 @@
 import type { Metadata } from "next";
-import { Poppins, Righteous } from "next/font/google";
 import "./globals.css";
+import { Anton, Inter } from 'next/font/google';
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+const anton = Anton({ subsets: ['latin'], weight: '400', variable: '--font-anton' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const righteous = Righteous({
-  variable: "--font-righteous",
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
-export const metadata: Metadata = {
-  title: "YOSAI | Official Hub",
-  description: "El próximo nivel del Reguetón y Corridos Tumbados.",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="es"
-      className={`${poppins.variable} ${righteous.variable} h-full antialiased dark`}
-    >
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-[#E11D48] selection:text-white">
+    <html lang="es" className={`${anton.variable} ${inter.variable}`}>
+      <body className="bg-[#121212] text-white overflow-x-hidden font-sans">
         {children}
       </body>
     </html>
