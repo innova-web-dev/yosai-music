@@ -21,18 +21,18 @@ export default function MinimalistHeroDemo() {
 
     return (
         <MinimalistHero
-            logoText="mnmlst."
+            logoText="Orion music col"
             navLinks={navLinks}
-            mainText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices, justo vel tempus."
+            mainText="Soy un artista con la esencia mexicana, con un estilo único que fusiona lo tradicional con lo moderno."
             readMoreLink="#"
             imageSrc="/images/yosai-monocromatico.png"
             imageAlt="A portrait of a person in a black turtleneck, in profile."
             overlayText={{
-                part1: 'less is',
-                part2: 'more.',
+                part1: 'Los corridos',
+                part2: 'del valle.',
             }}
             socialLinks={socialLinks}
-            locationText="Arlington Heights, IL"
+            locationText="Del Valle pal mundo."
         />
     );
 }

@@ -138,7 +138,7 @@ export default function ScrollyCanvas() {
                         YOSAI
                     </h1>
                     <p className="mt-2 sm:mt-4 text-sm sm:text-xl md:text-2xl tracking-[0.2em] sm:tracking-[0.3em] font-light text-neutral-300 uppercase">
-                        Productor / Compositor
+                        Artista
                     </p>
                 </div>
 

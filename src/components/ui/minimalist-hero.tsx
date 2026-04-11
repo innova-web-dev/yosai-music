@@ -101,7 +101,7 @@ export const MinimalistHero = ({
         >
           <p className="mx-auto max-w-xs text-[13px] leading-relaxed tracking-wide text-foreground/70 md:mx-0">{mainText}</p>
           <a href={readMoreLink} className="mt-5 inline-block text-xs font-semibold tracking-[0.15em] uppercase text-foreground/60 hover:text-foreground transition-colors duration-200 border-b border-foreground/20 hover:border-foreground pb-0.5">
-            Read More
+            Escucha mi música
           </a>
         </motion.div>
 
@@ -134,9 +134,9 @@ export const MinimalistHero = ({
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
-          className="z-40 order-3 absolute top-[30%] right-6 flex flex-col items-end text-right md:static md:top-auto md:right-auto md:z-20 md:items-center md:justify-start md:text-left"
+          className="z-40 order-3 absolute top-[40%] right-6 flex flex-col items-end text-right md:static md:top-auto md:right-auto md:z-20 md:items-center md:justify-start md:text-left"
         >
-          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[8rem]">
+          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7rem]">
             {overlayText.part1}
             <br />
             {overlayText.part2}
