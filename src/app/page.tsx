@@ -37,7 +37,7 @@ export default function Home() {
             navLinks={navLinks}
             mainText="Soy un artista con la esencia mexicana, con un estilo único que fusiona lo tradicional con lo moderno."
             readMoreLink="#"
-            imageSrc="/images/yosai-monocromatico.png"
+            imageSrc="https://res.cloudinary.com/dlw6fupap/image/upload/f_auto,q_auto/copy_62BEDAAE-1E45-4BFA-89D1-CB3E6A7E2305-ezgif.com-png-to-webp-converter_hcdxsd"
             imageAlt="A portrait of a person in a black turtleneck, in profile."
             overlayText={{
               part1: 'Los corridos',
