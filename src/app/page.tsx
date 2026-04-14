@@ -5,9 +5,59 @@ import SocialShowcase from '@/components/spatial-product-showcase';
 import { Music, Headphones, Mic, Radio } from 'lucide-react';
 import { MinimalistHero } from '@/components/ui/minimalist-hero';
 import { useIsMobile } from '@/hooks/use-mobile';
+import React from 'react';
+import Lenis from '@studio-freight/lenis';
+import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
 export default function Home() {
   const isMobile = useIsMobile();
+
+  React.useEffect(() => {
+    const lenis = new Lenis()
+    let rafId: number;
+
+    function raf(time: number) {
+      lenis.raf(time)
+      rafId = requestAnimationFrame(raf)
+    }
+    rafId = requestAnimationFrame(raf)
+
+    return () => {
+      lenis.destroy();
+      cancelAnimationFrame(rafId);
+    };
+  }, [])
+
+  const images = [
+    {
+      src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Modern architecture building',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Urban cityscape at sunset',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&h=800&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Abstract geometric pattern',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Mountain landscape',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=800&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Minimalist design elements',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Ocean waves and beach',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
+      alt: 'Forest trees and sunlight',
+    },
+  ];
 
   const navLinks = [
     { label: 'HOME', href: '#' },
@@ -27,7 +77,7 @@ export default function Home() {
   if (isMobile === null) return null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col">
+    <div className="relative min-h-screen flex flex-col">
       <main className="w-full selection:bg-white selection:text-black">
         {isMobile ? (
           <ScrollyCanvas />
@@ -47,6 +97,12 @@ export default function Home() {
             locationText="Del Valle pal mundo."
           />
         )}
+
+        <div className="relative flex flex-col items-center justify-center w-full pt-10 pb-[20vh]">
+          <ZoomParallax images={images} />
+        </div>
+
+        <div className="h-[20vh]" />
 
         {/* Redes y Plataformas */}
         <SocialShowcase />

@@ -189,7 +189,7 @@ ${isRedes ? 'md:flex-row-reverse' : 'md:flex-row'}`}
 
                 {/* Floating icons — NO container */}
                 <div className="flex items-center justify-center md:justify-start gap-6 sm:gap-8 md:gap-10">
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     {data.items.map((item, i) => (
                       <FloatingIcon key={item.label} item={item} index={i} />
                     ))}
