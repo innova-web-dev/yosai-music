@@ -94,6 +94,7 @@ export const BackgroundGradientAnimation = ({
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
+    // eslint-disable-next-line
     setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
   }, []);
 
