@@ -18,7 +18,7 @@ interface ZoomParallaxProps {
 }
 
 const desktopScales = [4, 5, 6, 5, 6, 8, 9];
-const mobileScales  = [4, 5, 6, 5, 6, 8, 9]; // Escalas más grandes para asegurar que tape la pantalla en móvil
+const mobileScales  = [2.5, 3.5, 4, 3.5, 4, 5, 6]; // Ajustado para que la imagen central (50vw/45vh) cubra la pantalla al finalizar el zoom
 
 export function ZoomParallax({ images }: ZoomParallaxProps) {
 	const container = useRef<HTMLDivElement>(null);
@@ -70,13 +70,13 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 							style={{ zIndex: 10 + index }}
 						>
 							<div className={`relative bg-zinc-800 shadow-2xl overflow-hidden ring-1 ring-white/10
-								${index === 0 ? 'w-[45vw] h-[30vh] md:h-[25vh] md:w-[25vw]' : ''}
-								${index === 1 ? '-top-[25vh] -left-[25vw] w-[35vw] h-[18vh] md:-top-[30vh] md:left-[5vw] md:h-[30vh] md:w-[35vw]' : ''}
-								${index === 2 ? '-top-[20vh] left-[25vw] w-[30vw] h-[22vh] md:-top-[10vh] md:-left-[25vw] md:h-[45vh] md:w-[20vw]' : ''}
-								${index === 3 ? 'top-[10vh] -left-[35vw] w-[28vw] h-[15vh] md:top-0 md:left-[27.5vw] md:h-[25vh] md:w-[25vw]' : ''}
-								${index === 4 ? 'top-[15vh] left-[30vw] w-[35vw] h-[18vh] md:top-[27.5vh] md:left-[5vw] md:h-[25vh] md:w-[20vw]' : ''}
-								${index === 5 ? 'top-[30vh] -left-[20vw] w-[35vw] h-[16vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : ''}
-								${index === 6 ? 'top-[25vh] left-[25vw] w-[25vw] h-[15vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''}
+								${index === 0 ? 'w-[50vw] h-[45vh] md:h-[25vh] md:w-[25vw]' : ''}
+								${index === 1 ? '-top-[30vh] -left-[25vw] w-[35vw] h-[30vh] md:-top-[30vh] md:left-[5vw] md:h-[30vh] md:w-[35vw]' : ''}
+								${index === 2 ? '-top-[25vh] left-[25vw] w-[35vw] h-[30vh] md:-top-[10vh] md:-left-[25vw] md:h-[45vh] md:w-[20vw]' : ''}
+								${index === 3 ? 'top-[10vh] -left-[35vw] w-[30vw] h-[28vh] md:top-0 md:left-[27.5vw] md:h-[25vh] md:w-[25vw]' : ''}
+								${index === 4 ? 'top-[15vh] left-[30vw] w-[35vw] h-[32vh] md:top-[27.5vh] md:left-[5vw] md:h-[25vh] md:w-[20vw]' : ''}
+								${index === 5 ? 'top-[35vh] -left-[20vw] w-[35vw] h-[30vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : ''}
+								${index === 6 ? 'top-[30vh] left-[25vw] w-[30vw] h-[28vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''}
 							`}>
 								{/* eslint-disable-next-line @next/next/no-img-element */}
 								<img
