@@ -71,12 +71,12 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						>
 							<div className={`relative bg-zinc-800 shadow-2xl overflow-hidden ring-1 ring-white/10
 								${index === 0 ? 'w-[45vw] h-[30vh] md:h-[25vh] md:w-[25vw]' : ''}
-								${index === 1 ? '-top-[15vh] -left-[15vw] w-[35vw] h-[18vh] md:-top-[30vh] md:left-[5vw] md:h-[30vh] md:w-[35vw]' : ''}
-								${index === 2 ? '-top-[10vh] left-[15vw] w-[30vw] h-[22vh] md:-top-[10vh] md:-left-[25vw] md:h-[45vh] md:w-[20vw]' : ''}
-								${index === 3 ? 'top-[5vh] -left-[25vw] w-[28vw] h-[15vh] md:top-0 md:left-[27.5vw] md:h-[25vh] md:w-[25vw]' : ''}
-								${index === 4 ? 'top-[10vh] left-[20vw] w-[35vw] h-[18vh] md:top-[27.5vh] md:left-[5vw] md:h-[25vh] md:w-[20vw]' : ''}
-								${index === 5 ? 'top-[22vh] -left-[15vw] w-[35vw] h-[16vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : ''}
-								${index === 6 ? 'top-[18vh] left-[18vw] w-[25vw] h-[15vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''}
+								${index === 1 ? '-top-[25vh] -left-[25vw] w-[35vw] h-[18vh] md:-top-[30vh] md:left-[5vw] md:h-[30vh] md:w-[35vw]' : ''}
+								${index === 2 ? '-top-[20vh] left-[25vw] w-[30vw] h-[22vh] md:-top-[10vh] md:-left-[25vw] md:h-[45vh] md:w-[20vw]' : ''}
+								${index === 3 ? 'top-[10vh] -left-[35vw] w-[28vw] h-[15vh] md:top-0 md:left-[27.5vw] md:h-[25vh] md:w-[25vw]' : ''}
+								${index === 4 ? 'top-[15vh] left-[30vw] w-[35vw] h-[18vh] md:top-[27.5vh] md:left-[5vw] md:h-[25vh] md:w-[20vw]' : ''}
+								${index === 5 ? 'top-[30vh] -left-[20vw] w-[35vw] h-[16vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : ''}
+								${index === 6 ? 'top-[25vh] left-[25vw] w-[25vw] h-[15vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''}
 							`}>
 								{/* eslint-disable-next-line @next/next/no-img-element */}
 								<img
