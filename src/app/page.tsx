@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen flex flex-col">
-      <main className="w-full selection:bg-white selection:text-black">
+      <main className="relative w-full selection:bg-white selection:text-black">
         {isMobile ? (
           <ScrollyCanvas />
         ) : (
@@ -98,7 +98,7 @@ export default function Home() {
           />
         )}
 
-        <div className="relative flex flex-col items-center justify-center w-full pt-10 pb-[20vh]">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full pt-10 pb-[20vh]">
           <ZoomParallax images={images} />
         </div>
 
