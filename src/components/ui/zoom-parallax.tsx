@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -7,14 +8,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Image {
+interface ImageProps {
 	src: string;
 	alt?: string;
 }
 
 interface ZoomParallaxProps {
 	/** Array of images to be displayed in the parallax effect max 7 images */
-	images: Image[];
+	images: ImageProps[];
 }
 
 const desktopScales = [4, 5, 6, 5, 6, 8, 9];
@@ -41,7 +42,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 					trigger: container.current,
 					start: 'top top',
 					end: 'bottom bottom',
-					scrub: true,
+					scrub: 1,
 				},
 			});
 
@@ -50,7 +51,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 			imagesRefs.current.forEach((el, index) => {
 				if (el) {
 					const scaleValue = currentScales[index % currentScales.length];
-					tl.to(el, { scale: scaleValue, ease: 'none' }, 0);
+					tl.to(el, { scale: scaleValue, ease: 'none', force3D: true }, 0);
 				}
 			});
 		});
@@ -78,11 +79,13 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 								${index === 5 ? 'top-[35vh] -left-[20vw] w-[35vw] h-[30vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : ''}
 								${index === 6 ? 'top-[30vh] left-[25vw] w-[30vw] h-[28vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''}
 							`}>
-								{/* eslint-disable-next-line @next/next/no-img-element */}
-								<img
+								<Image
 									src={src || '/placeholder.svg'}
 									alt={alt || `Parallax image ${index + 1}`}
-									className="h-full w-full object-cover"
+									fill
+									className="object-cover"
+									sizes={index === 0 ? "100vw" : "(max-width: 768px) 50vw, 33vw"}
+									priority={index === 0}
 								/>
 							</div>
 						</div>
