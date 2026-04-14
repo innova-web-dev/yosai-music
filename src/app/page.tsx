@@ -9,22 +9,29 @@ import React from 'react';
 import Lenis from '@studio-freight/lenis';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Home() {
   const isMobile = useIsMobile();
 
   React.useEffect(() => {
     const lenis = new Lenis()
-    let rafId: number;
+    
+    // Sincronizar Lenis con ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update)
 
-    function raf(time: number) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-    rafId = requestAnimationFrame(raf)
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+    })
+
+    gsap.ticker.lagSmoothing(0)
 
     return () => {
       lenis.destroy();
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(lenis.raf);
     };
   }, [])
 

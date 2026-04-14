@@ -1,7 +1,11 @@
 'use client';
 
-import { useScroll, useTransform, motion } from 'framer-motion';
 import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Image {
 	src: string;
@@ -13,34 +17,67 @@ interface ZoomParallaxProps {
 	images: Image[];
 }
 
+const desktopScales = [4, 5, 6, 5, 6, 8, 9];
+const mobileScales  = [4, 5, 6, 5, 6, 8, 9]; // Escalas más grandes para asegurar que tape la pantalla en móvil
+
 export function ZoomParallax({ images }: ZoomParallaxProps) {
-	const container = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: container,
-		offset: ['start start', 'end end'],
-	});
+	const container = useRef<HTMLDivElement>(null);
+	const imagesRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-	const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
-	const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-	const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-	const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
-	const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+	useGSAP(() => {
+		const mm = gsap.matchMedia();
 
-	const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
+		mm.add({
+			isDesktop: "(min-width: 768px)",
+			isMobile: "(max-width: 767px)",
+			reduceMotion: "(prefers-reduced-motion: reduce)"
+		}, (context) => {
+			const { isDesktop, reduceMotion } = context.conditions as { isDesktop: boolean, reduceMotion: boolean };
+
+			if (reduceMotion) return;
+
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: container.current,
+					start: 'top top',
+					end: 'bottom bottom',
+					scrub: true,
+				},
+			});
+
+			const currentScales = isDesktop ? desktopScales : mobileScales;
+
+			imagesRefs.current.forEach((el, index) => {
+				if (el) {
+					const scaleValue = currentScales[index % currentScales.length];
+					tl.to(el, { scale: scaleValue, ease: 'none' }, 0);
+				}
+			});
+		});
+
+		return () => mm.revert();
+	}, { scope: container });
 
 	return (
-		<div ref={container} className="relative h-[300vh] w-full">
-			<div className="sticky top-0 h-screen w-full overflow-hidden">
+		<div ref={container} className="relative h-[300dvh] w-full">
+			<div className="sticky top-0 h-dvh w-full overflow-hidden bg-zinc-900/50">
 				{images.map(({ src, alt }, index) => {
-					const scale = scales[index % scales.length];
-
 					return (
-						<motion.div
+						<div
 							key={index}
-							style={{ scale }}
-							className={`absolute top-0 flex h-full w-full items-center justify-center z-[${10 + index}] ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]' : ''} ${index === 5 ? '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]' : ''} ${index === 6 ? '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]' : ''} `}
+							ref={(el) => { imagesRefs.current[index] = el; }}
+							className={`absolute top-0 flex h-full w-full items-center justify-center will-change-transform`}
+							style={{ zIndex: 10 + index }}
 						>
-							<div className="relative h-[25vh] w-[25vw] bg-zinc-800 shadow-2xl overflow-hidden ring-1 ring-white/10">
+							<div className={`relative bg-zinc-800 shadow-2xl overflow-hidden ring-1 ring-white/10
+								${index === 0 ? 'w-[45vw] h-[30vh] md:h-[25vh] md:w-[25vw]' : ''}
+								${index === 1 ? '-top-[15vh] -left-[15vw] w-[35vw] h-[18vh] md:-top-[30vh] md:left-[5vw] md:h-[30vh] md:w-[35vw]' : ''}
+								${index === 2 ? '-top-[10vh] left-[15vw] w-[30vw] h-[22vh] md:-top-[10vh] md:-left-[25vw] md:h-[45vh] md:w-[20vw]' : ''}
+								${index === 3 ? 'top-[5vh] -left-[25vw] w-[28vw] h-[15vh] md:top-0 md:left-[27.5vw] md:h-[25vh] md:w-[25vw]' : ''}
+								${index === 4 ? 'top-[10vh] left-[20vw] w-[35vw] h-[18vh] md:top-[27.5vh] md:left-[5vw] md:h-[25vh] md:w-[20vw]' : ''}
+								${index === 5 ? 'top-[22vh] -left-[15vw] w-[35vw] h-[16vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : ''}
+								${index === 6 ? 'top-[18vh] left-[18vw] w-[25vw] h-[15vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''}
+							`}>
 								{/* eslint-disable-next-line @next/next/no-img-element */}
 								<img
 									src={src || '/placeholder.svg'}
@@ -48,7 +85,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 									className="h-full w-full object-cover"
 								/>
 							</div>
-						</motion.div>
+						</div>
 					);
 				})}
 			</div>

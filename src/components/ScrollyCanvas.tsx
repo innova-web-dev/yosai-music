@@ -96,6 +96,7 @@ export default function ScrollyCanvas() {
                 end: "+=400%", // Duración de los textos
                 scrub: 0.5,
                 pin: true, // Fija el contenedor
+                refreshPriority: 1, // Se evalua primero que ZoomParallax
             }
         });
 
@@ -110,6 +111,9 @@ export default function ScrollyCanvas() {
             .to(".text-2", { opacity: 0, y: -50, duration: 0.2 }, 0.6)
 
             .to(".text-3", { opacity: 1, y: 0, duration: 0.2 }, 0.8);
+
+        // Forzar recalculo de ScrollTrigger una vez que este componente asíncrono fija (pin) su tamaño
+        ScrollTrigger.refresh();
 
     }, { scope: containerRef, dependencies: [images] });
 
