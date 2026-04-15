@@ -4,10 +4,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // =========================================
-// CONFIGURACIÓN DE DATOS
+// TYPES & DATA ARCHITECTURE
 // =========================================
-
-export type SectionId = 'redes' | 'plataformas';
+export type SectionId = 'plataformas' | 'redes';
 
 const SOCIAL_DATA: Record<SectionId, {
   id: string;
@@ -15,114 +14,76 @@ const SOCIAL_DATA: Record<SectionId, {
   title: string;
   description: string;
   image: string;
-  colors: { gradient: string; glow: string };
+  // Optimizamos el glow para usar valores de Tailwind que generen un aura volumétrica
+  glowColor: string;
   items: { label: string; logo: string; link: string; floatDelay: number }[];
 }> = {
   plataformas: {
     id: 'plataformas',
     label: 'Plataformas',
     title: 'Escucha mi música',
-    description: 'Mi música disponible en las mejores plataformas de streaming.',
-    image: '/images/yosai-musica.jpeg',
-    colors: {
-      gradient: 'from-blue-600 to-indigo-900',
-      glow: 'bg-blue-500',
-    },
+    description: 'Los corridos más duros disponibles en todas las plataformas de streaming de alta fidelidad.',
+    image: '/images/yosaiplataforma-sinfondo.webp',
+    glowColor: 'bg-blue-600/50', // Azul eléctrico/tecnológico para streaming
     items: [
-      { label: 'Spotify', logo: '/icons/spotify.png', link: '...', floatDelay: 0 },
-      { label: 'YouTube', logo: '/icons/youtube.png', link: '...', floatDelay: 1.2 },
-      { label: 'Apple Music', logo: '/icons/apple.png', link: '...', floatDelay: 0.6 },
+      { label: 'Spotify', logo: '/icons/spotify.png', link: '#', floatDelay: 0 },
+      { label: 'YouTube', logo: '/icons/youtube.png', link: '#', floatDelay: 1.2 },
+      { label: 'Apple Music', logo: '/icons/apple.png', link: '#', floatDelay: 0.6 },
     ],
   },
   redes: {
     id: 'redes',
     label: 'Social Media',
     title: 'Conecta conmigo',
-    description: 'Sigue mi día a día, procesos creativos y anuncios oficiales.',
-    image: '/images/yosai2.jpeg',
-    colors: {
-      gradient: 'from-red-600 to-orange-900',
-      glow: 'bg-red-500',
-    },
+    description: 'El día a día, procesos creativos en el estudio y los avisos de los próximos eventos.',
+    image: '/images/yosairedes-sinfondo.webp',
+    glowColor: 'bg-red-600/50', // Rojo intenso/pasional para la conexión social
     items: [
-      { label: 'Instagram', logo: '/icons/instagram.png', link: 'https://www.instagram.com/yosaimusic?igsh=NXBzemU3NDJjb3R5', floatDelay: 0.3 },
-      { label: 'Facebook', logo: '/icons/facebook.png', link: 'https://facebook.com/yosaimusic1', floatDelay: 0.9 },
-      { label: 'Contacto', logo: '/icons/contacto.png', link: 'mailto:yosaimusic@gmail.com', floatDelay: 1.5 },
+      { label: 'Instagram', logo: '/icons/instagram_icon.png', link: '#', floatDelay: 0.3 },
+      { label: 'Facebook', logo: '/icons/facebook.png', link: '#', floatDelay: 0.9 },
+      { label: 'Contacto', logo: '/icons/contacto.png', link: '#', floatDelay: 1.5 },
     ],
   },
 };
 
 // =========================================
-// Floating Icon Component
+// FLOATING ICON COMPONENT (Sin contenedores)
 // =========================================
-
-function FloatingIcon({
-  item,
-  index,
-}: {
-  item: { label: string; logo: string; link: string; floatDelay: number };
-  index: number;
-}) {
+function FloatingIcon({ item, index }: { item: any; index: number }) {
   return (
     <motion.a
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex flex-col items-center gap-2 sm:gap-3 cursor-pointer"
-      initial={{ opacity: 0, y: 30, scale: 0.8 }}
+      className="group relative flex flex-col items-center justify-center gap-3 cursor-pointer"
+      // Entrada en escena fluida
+      initial={{ opacity: 0, y: 40, scale: 0.8 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.8 }}
-      transition={{
-        delay: index * 0.12,
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      transition={{ delay: index * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Floating animation wrapper */}
+      {/* Animación de flotado continuo (Respiración) */}
       <motion.div
-        className="relative"
-        animate={{
-          y: [0, -10, 0, 6, 0],
-          rotate: [0, 1.5, 0, -1.5, 0],
-        }}
-        transition={{
-          duration: 5 + item.floatDelay,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: item.floatDelay,
-        }}
+        animate={{ y: [0, -12, 0, 8, 0] }}
+        transition={{ duration: 6 + item.floatDelay, repeat: Infinity, ease: 'easeInOut', delay: item.floatDelay }}
+        // Interacción táctil/hover premium
+        whileHover={{ scale: 1.2, rotate: [-2, 2, 0] }}
+        whileTap={{ scale: 0.95 }}
       >
-        {/* Glow behind icon */}
-        <div className="absolute inset-0 rounded-full bg-white/5 blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-        {/* Icon */}
-        <motion.div
-          className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full
-                     bg-white/[0.03] backdrop-blur-sm border border-white/[0.06]
-                     transition-all duration-500 ease-out
-                     group-hover:bg-white/[0.08] group-hover:border-white/[0.15]
-                     group-hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]"
-          whileHover={{ scale: 1.35 }}
-          whileTap={{ scale: 1.2 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-        >
-          <img
-            src={item.logo}
-            alt={item.label}
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 object-contain
-                       filter brightness-90 group-hover:brightness-110
-                       group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]
-                       transition-all duration-500"
-          />
-        </motion.div>
+        <img
+          src={item.logo}
+          alt={item.label}
+          // Iconos más grandes y con drop-shadow en lugar de estar encerrados
+          className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain 
+                     filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] 
+                     group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]
+                     transition-all duration-500 will-change-[filter,transform]"
+        />
       </motion.div>
 
-      {/* Label on hover */}
-      <span
-        className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-zinc-600
-                   group-hover:text-zinc-300 transition-all duration-300
-                   opacity-0 group-hover:opacity-100"
-      >
+      {/* Etiqueta minimalista */}
+      <span className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500
+                       group-hover:text-white transition-colors duration-300">
         {item.label}
       </span>
     </motion.a>
@@ -130,65 +91,90 @@ function FloatingIcon({
 }
 
 // =========================================
-// COMPONENTE PRINCIPAL
+// MAIN SHOWCASE COMPONENT
 // =========================================
-
 export default function SocialShowcase() {
   const [activeTab, setActiveTab] = useState<SectionId>('plataformas');
   const data = SOCIAL_DATA[activeTab];
   const isRedes = activeTab === 'redes';
 
   return (
-    <section className="relative min-h-screen w-full bg-[#020202] py-16 sm:py-20 md:py-24 flex flex-col items-center justify-center overflow-hidden border-t border-white/5">
+    <section className="relative h-dvh w-full bg-[#050505] flex flex-col items-center justify-between overflow-hidden py-6 md:py-10">
 
-      <main className="relative z-10 w-full px-4 sm:px-6 max-w-7xl mx-auto">
+      {/* Ruido de fondo — CSS-based grain */}
+      <div className="film-grain" style={{ position: 'absolute', zIndex: 60 }} aria-hidden="true" />
+
+      {/* 2. MAIN CONTENT AREA: flex-1 usa todo el espacio sobrante entre arriba y los tabs */}
+      <main className="relative z-10 flex-1 w-full px-6 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-0">
+
         <motion.div
           layout
-          className={`flex flex-col items-center justify-center gap-10 sm:gap-12 md:gap-20
-${isRedes ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+          className={`w-full h-full flex flex-col items-center justify-center gap-6 md:gap-12 
+          ${isRedes ? 'md:flex-row-reverse' : 'md:flex-row'}`}
         >
-          {/* ── Visual Side: Circular Image ── */}
-          <div className="relative shrink-0">
-            <div className="relative h-56 w-56 sm:h-72 sm:w-72 md:h-[420px] md:w-[420px] rounded-full overflow-hidden bg-zinc-900/40 border border-white/10 backdrop-blur-xl">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={data.id}
-                  src={data.image}
-                  initial={{ scale: 1.1, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.9, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-full h-full object-cover"
-                />
-              </AnimatePresence>
-            </div>
 
-            {/* Subtle glow ring */}
-            <div className={`absolute -inset-4 rounded-full bg-gradient-to-r ${data.colors.gradient} opacity-[0.07] blur-2xl pointer-events-none`} />
-          </div>
+          {/* ── VISUAL SIDE: Responsive e Inmersivo ── */}
+          {/* Ajustamos el min-h y max-h para darle un espacio de respiro perfecto sin desbordar */}
+          <div className="relative flex-1 w-full h-full min-h-[350px] max-h-[45vh] md:max-h-[65vh] flex justify-center items-end md:items-center">
 
-          {/* ── Content Side: Title + Floating Icons ── */}
-          <div className="w-full max-w-md text-white text-center md:text-left">
+            {/* El Aura / Glow animado que envuelve la imagen */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={data.id}
-                initial={{ opacity: 0, x: 20 }}
+                key={`glow-${data.id}`}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                            w-[80%] md:w-[60%] aspect-square rounded-full blur-[80px] md:blur-[120px] 
+                            ${data.glowColor} pointer-events-none`}
+              />
+            </AnimatePresence>
+
+            {/* La imagen WebP recortada */}
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={`img-${data.id}`}
+                src={data.image}
+                alt={`Yosai ${data.label}`}
+                initial={{ opacity: 0, y: 40, filter: 'brightness(0.5)' }}
+                animate={{ opacity: 1, y: 0, filter: 'brightness(1)' }}
+                exit={{ opacity: 0, y: -40, filter: 'brightness(0.5)' }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                // LA CLAVE ESTÁ AQUÍ ABAJO: h-full w-auto max-h-full
+                // Esto garantiza que la imagen se escale basándose en la altura disponible, nunca recortándose.
+                className="relative z-10 h-full w-auto max-h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] will-change-[transform,opacity]"
+              />
+            </AnimatePresence>
+          </div>
+
+          {/* ── CONTENT SIDE: Tipografía y Controles ── */}
+          <div className="w-full max-w-lg text-center md:text-left relative z-20">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`content-${data.id}`}
+                initial={{ opacity: 0, x: isRedes ? -30 : 30 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
+                exit={{ opacity: 0, x: isRedes ? 30 : -30 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] sm:tracking-widest text-zinc-500 mb-2">
+                {/* Etiqueta */}
+                <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-zinc-500 mb-4">
                   {data.label}
                 </h3>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-anton uppercase mb-3 sm:mb-4 tracking-tighter">
+
+                {/* Título: Requiere una fuente condensada/bold como 'Oswald' o 'Anton' */}
+                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase mb-6 tracking-tighter leading-none text-white drop-shadow-lg">
                   {data.title}
                 </h2>
-                <p className="text-xs sm:text-sm text-zinc-500 mb-8 sm:mb-10 max-w-sm mx-auto md:mx-0">
+
+                {/* Descripción: Fuente limpia como 'Montserrat' para legibilidad */}
+                <p className="text-sm md:text-base text-zinc-400 mb-12 max-w-sm mx-auto md:mx-0 leading-relaxed font-light">
                   {data.description}
                 </p>
 
-                {/* Floating icons — NO container */}
-                <div className="flex items-center justify-center md:justify-start gap-6 sm:gap-8 md:gap-10">
+                {/* Íconos Flotantes sin círculos */}
+                <div className="flex items-center justify-center md:justify-start gap-8 md:gap-12">
                   <AnimatePresence>
                     {data.items.map((item, i) => (
                       <FloatingIcon key={item.label} item={item} index={i} />
@@ -201,21 +187,21 @@ ${isRedes ? 'md:flex-row-reverse' : 'md:flex-row'}`}
         </motion.div>
       </main>
 
-      {/* ── Tab Switcher ── */}
-      <div className="mt-14 sm:mt-16 md:mt-20 relative z-50">
-        <div className="flex p-1 sm:p-1.5 bg-zinc-900/80 rounded-full border border-white/10 backdrop-blur-3xl shadow-2xl">
+      {/* ── TAB SWITCHER (Glassmorphism avanzado) ── */}
+      <div className="mt-24 relative z-50">
+        <div className="flex p-1.5 bg-zinc-900/50 rounded-full border border-white/5 backdrop-blur-xl shadow-2xl">
           {(['plataformas', 'redes'] as SectionId[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`relative px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all
-${activeTab === tab ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+              className={`relative px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-300
+                ${activeTab === tab ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
             >
               {activeTab === tab && (
                 <motion.div
-                  layoutId="activeTabSocial"
-                  className={`absolute inset-0 rounded-full bg-gradient-to-r ${SOCIAL_DATA[tab].colors.gradient} shadow-[0_0_20px_rgba(0,0,0,0.4)]`}
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  layoutId="activeTabPill"
+                  className="absolute inset-0 rounded-full bg-white/10 border border-white/20"
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
               <span className="relative z-10">{tab}</span>

@@ -19,7 +19,7 @@ export default function Home() {
 
   React.useEffect(() => {
     const lenis = new Lenis()
-    
+
     // Sincronizar Lenis con ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
@@ -37,8 +37,8 @@ export default function Home() {
 
   const images = [
     {
-      src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Modern architecture building',
+      src: '/images/yosai1.jpeg',
+      alt: 'yosai colores',
     },
     {
       src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
@@ -85,6 +85,9 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen flex flex-col">
+      {/* ── CINEMATIC FILM GRAIN: Full-page overlay ── */}
+      <div className="film-grain" aria-hidden="true" />
+
       <main className="relative w-full selection:bg-white selection:text-black">
         {isMobile ? (
           <ScrollyCanvas />
@@ -105,11 +108,9 @@ export default function Home() {
           />
         )}
 
-        <div className="relative z-10 flex flex-col items-center justify-center w-full pt-10 pb-[20vh]">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full">
           <ZoomParallax images={images} />
         </div>
-
-        <div className="h-[20vh]" />
 
         {/* Redes y Plataformas */}
         <SocialShowcase />

@@ -61,7 +61,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
 	return (
 		<div ref={container} className="relative h-[300dvh] w-full">
-			<div className="sticky top-0 h-dvh w-full overflow-hidden bg-zinc-900/50">
+			<div className="sticky top-0 h-dvh w-full overflow-hidden">
 				{images.map(({ src, alt }, index) => {
 					return (
 						<div

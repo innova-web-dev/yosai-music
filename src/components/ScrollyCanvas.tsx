@@ -18,6 +18,7 @@ const currentFrame = (index: number) => {
 export default function ScrollyCanvas() {
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const heroTextRef = useRef<HTMLDivElement>(null);
     const [images, setImages] = useState<HTMLImageElement[]>([]);
 
     // 1. Pre-carga de imágenes
@@ -65,7 +66,50 @@ export default function ScrollyCanvas() {
         ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
 
-    // 2. Animación con GSAP
+    // ── HERO REVEAL: Character-split animation with Bebas Neue ──
+    useGSAP(() => {
+        if (!heroTextRef.current) return;
+
+        const titleEl = heroTextRef.current.querySelector('.hero-title');
+        const subtitleEl = heroTextRef.current.querySelector('.hero-subtitle');
+        if (!titleEl || !subtitleEl) return;
+
+        // Manual character split for "YOSAI"
+        const text = titleEl.textContent || '';
+        titleEl.textContent = '';
+        const chars: HTMLSpanElement[] = [];
+
+        text.split('').forEach((char) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.display = 'inline-block';
+            span.style.willChange = 'transform, opacity, filter';
+            titleEl.appendChild(span);
+            chars.push(span);
+        });
+
+        // Timeline: letters reveal from below with blur
+        const tl = gsap.timeline({ delay: 0.3 });
+
+        tl.from(chars, {
+            y: 50,
+            opacity: 0,
+            filter: 'blur(10px)',
+            stagger: 0.05,
+            duration: 0.8,
+            ease: 'power3.out',
+        })
+        .from(subtitleEl, {
+            y: 20,
+            opacity: 0,
+            filter: 'blur(6px)',
+            duration: 0.6,
+            ease: 'power2.out',
+        }, '-=0.3');
+
+    }, { scope: heroTextRef });
+
+    // 2. Animación con GSAP (scroll-driven)
     useGSAP(() => {
         if (images.length === 0) return;
 
@@ -136,12 +180,12 @@ export default function ScrollyCanvas() {
             {/* Contenedor escroleable que se pineara para animar los textos  */}
             <section ref={containerRef} className="relative h-screen w-full bg-transparent overflow-hidden">
 
-                {/* Texto Hero YOSAI superpuesto */}
-                <div className="hero-text absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none opacity-100">
-                    <h1 className="text-[18vw] sm:text-[15vw] md:text-[12vw] leading-none font-anton tracking-widest text-white mix-blend-difference drop-shadow-xl">
+                {/* Texto Hero YOSAI superpuesto — Bebas Neue + character reveal */}
+                <div ref={heroTextRef} className="hero-text absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none opacity-100">
+                    <h1 className="hero-title text-[18vw] sm:text-[15vw] md:text-[12vw] leading-none font-bebas tracking-widest text-white mix-blend-difference drop-shadow-xl uppercase">
                         YOSAI
                     </h1>
-                    <p className="mt-2 sm:mt-4 text-sm sm:text-xl md:text-2xl tracking-[0.2em] sm:tracking-[0.3em] font-light text-neutral-300 uppercase">
+                    <p className="hero-subtitle mt-2 sm:mt-4 text-sm sm:text-xl md:text-2xl tracking-[0.2em] sm:tracking-[0.3em] font-light text-neutral-300 uppercase">
                         Artista
                     </p>
                 </div>
@@ -150,7 +194,7 @@ export default function ScrollyCanvas() {
                 <div className="absolute inset-0 z-30 pointer-events-none flex items-center px-4 sm:px-8 md:px-24">
 
                     <div className="text-1 opacity-0 translate-y-12 w-full text-center">
-                        <h2 className="text-2xl sm:text-4xl md:text-7xl font-bold font-anton uppercase text-white drop-shadow-2xl">
+                        <h2 className="text-2xl sm:text-4xl md:text-7xl font-bold font-bebas uppercase text-white drop-shadow-2xl">
                             Haciendo el cambio
                         </h2>
                     </div>
@@ -158,7 +202,7 @@ export default function ScrollyCanvas() {
                     <div className="text-2 opacity-0 translate-y-12 w-full text-left max-w-3xl">
                         <h2 className="text-xl sm:text-3xl md:text-6xl font-light text-white drop-shadow-2xl">
                             En la <br />
-                            <span className="font-anton font-normal uppercase text-neutral-400">industria musical.</span>
+                            <span className="font-bebas font-normal uppercase text-neutral-400">industria musical.</span>
                         </h2>
                     </div>
 
