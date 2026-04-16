@@ -149,6 +149,51 @@
 }
 
 /* =========================================
+   ACCESSIBILITY — Focus Visible Rings
+   WCAG 2.4.7: Visible Focus
+   ========================================= */
+@layer utilities {
+  .focus-visible:outline-none {
+    outline: none;
+  }
+
+  .focus-visible:ring-base {
+    @apply focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .focus-visible:ring-subtle {
+    @apply focus-visible:ring-1 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-background;
+  }
+}
+
+/* Global focus styles for interactive elements */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+/* Ensure focus is visible in dark mode */
+.dark a:focus-visible,
+.dark button:focus-visible,
+.dark [role="button"]:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Respect reduced motion — disable animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================
    SPOTIFY PLAYER — Shimmer skeleton
    ========================================= */
 @keyframes shimmer {

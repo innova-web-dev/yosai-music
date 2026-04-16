@@ -26,16 +26,22 @@ interface MinimalistHeroProps {
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <a
     href={href}
-    className="text-sm font-medium tracking-widest text-foreground/60 transition-colors hover:text-foreground"
+    className="text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background-foreground rounded-md px-2 py-1"
   >
     {children}
   </a>
 );
 
-// Helper component for social media icons
+// Helper component for social media icons with proper touch target
 const SocialIcon = ({ href, icon: Icon }: { href: string; icon: LucideIcon }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/60 transition-colors hover:text-foreground">
-    <Icon className="h-5 w-5" />
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label="Visit social profile"
+    className="text-foreground/70 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-md p-2 -m-2"
+  >
+    <Icon className="h-5 w-5" aria-hidden="true" />
   </a>
 );
 
@@ -81,12 +87,14 @@ export const MinimalistHero = ({
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col space-y-1.5 md:hidden"
-          aria-label="Open menu"
+          className="flex flex-col justify-center items-center space-y-1.5 md:hidden min-h-11 min-w-11 p-2 -m-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="main-navigation"
         >
-          <span className="block h-0.5 w-6 bg-foreground"></span>
-          <span className="block h-0.5 w-6 bg-foreground"></span>
-          <span className="block h-0.5 w-5 bg-foreground"></span>
+          <span className="block h-0.5 w-6 bg-foreground rounded-full" aria-hidden="true"></span>
+          <span className="block h-0.5 w-6 bg-foreground rounded-full" aria-hidden="true"></span>
+          <span className="block h-0.5 w-5 bg-foreground rounded-full" aria-hidden="true"></span>
         </motion.button>
       </header>
 
@@ -99,8 +107,12 @@ export const MinimalistHero = ({
           transition={{ duration: 0.6, delay: 1, ease: [0.23, 1, 0.32, 1] }}
           className="z-20 order-2 md:order-1 text-center md:text-left"
         >
-          <p className="mx-auto max-w-xs text-[13px] leading-relaxed tracking-wide text-foreground/70 md:mx-0">{mainText}</p>
-          <a href={readMoreLink} className="mt-5 inline-block text-xs font-semibold tracking-[0.15em] uppercase text-foreground/60 hover:text-foreground transition-colors duration-200 border-b border-foreground/20 hover:border-foreground pb-0.5">
+          <p className="mx-auto max-w-xs text-[13px] leading-relaxed tracking-wide text-foreground/80 md:mx-0">{mainText}</p>
+          <a 
+            href={readMoreLink} 
+            className="mt-5 inline-block text-xs font-semibold tracking-[0.15em] uppercase text-foreground/80 hover:text-foreground transition-colors duration-200 border-b border-foreground/30 hover:border-foreground pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-sm"
+            aria-label="Listen to my music"
+          >
             Escucha mi música
           </a>
         </motion.div>

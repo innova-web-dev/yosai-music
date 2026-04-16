@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -49,7 +50,14 @@ const SOCIAL_DATA: Record<SectionId, {
 // =========================================
 // FLOATING ICON COMPONENT (Sin contenedores)
 // =========================================
-function FloatingIcon({ item, index }: { item: any; index: number }) {
+interface SocialItem {
+  label: string;
+  logo: string;
+  link: string;
+  floatDelay: number;
+}
+
+function FloatingIcon({ item, index }: { item: SocialItem; index: number }) {
   return (
     <motion.a
       href={item.link}
@@ -66,18 +74,19 @@ function FloatingIcon({ item, index }: { item: any; index: number }) {
       <motion.div
         animate={{ y: [0, -12, 0, 8, 0] }}
         transition={{ duration: 6 + item.floatDelay, repeat: Infinity, ease: 'easeInOut', delay: item.floatDelay }}
-        // Interacción táctil/hover premium
         whileHover={{ scale: 1.2, rotate: [-2, 2, 0] }}
         whileTap={{ scale: 0.95 }}
       >
-        <img
+        <Image
           src={item.logo}
           alt={item.label}
-          // Iconos más grandes y con drop-shadow en lugar de estar encerrados
+          width={96}
+          height={96}
           className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain 
                      filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] 
                      group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]
                      transition-all duration-500 will-change-[filter,transform]"
+          unoptimized
         />
       </motion.div>
 
