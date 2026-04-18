@@ -53,6 +53,10 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
+  --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-expo: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+
   --animate-first: moveVertical 30s ease infinite;
   --animate-second: moveInCircle 20s reverse infinite;
   --animate-third: moveInCircle 40s linear infinite;
@@ -152,18 +156,12 @@
    ACCESSIBILITY — Focus Visible Rings
    WCAG 2.4.7: Visible Focus
    ========================================= */
-@layer utilities {
-  .focus-visible:outline-none {
-    outline: none;
-  }
+@utility ring-base {
+  @apply ring-2 ring-white/50 ring-offset-2 ring-offset-background;
+}
 
-  .focus-visible:ring-base {
-    @apply focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
-  }
-
-  .focus-visible:ring-subtle {
-    @apply focus-visible:ring-1 focus-visible:ring-white/30 focus-visible:ring-offset-1 focus-visible:ring-offset-background;
-  }
+@utility ring-subtle {
+  @apply ring-1 ring-white/30 ring-offset-1 ring-offset-background;
 }
 
 /* Global focus styles for interactive elements */

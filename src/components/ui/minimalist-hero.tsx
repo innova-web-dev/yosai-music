@@ -26,7 +26,7 @@ interface MinimalistHeroProps {
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <a
     href={href}
-    className="text-sm font-medium tracking-widest text-foreground/70 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background-foreground rounded-md px-2 py-1"
+    className="text-sm font-medium tracking-widest text-foreground/70 transition-all duration-200 hover:text-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background-foreground rounded-md px-2 py-1"
   >
     {children}
   </a>
@@ -39,7 +39,7 @@ const SocialIcon = ({ href, icon: Icon }: { href: string; icon: LucideIcon }) =>
     target="_blank" 
     rel="noopener noreferrer" 
     aria-label="Visit social profile"
-    className="text-foreground/70 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-md p-2 -m-2"
+    className="text-foreground/70 transition-all duration-200 hover:text-foreground active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-md p-2 -m-2"
   >
     <Icon className="h-5 w-5" aria-hidden="true" />
   </a>
@@ -110,7 +110,7 @@ export const MinimalistHero = ({
           <p className="mx-auto max-w-xs text-[13px] leading-relaxed tracking-wide text-foreground/80 md:mx-0">{mainText}</p>
           <a 
             href={readMoreLink} 
-            className="mt-5 inline-block text-xs font-semibold tracking-[0.15em] uppercase text-foreground/80 hover:text-foreground transition-colors duration-200 border-b border-foreground/30 hover:border-foreground pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-sm"
+            className="mt-5 inline-block text-xs font-semibold tracking-[0.15em] uppercase text-foreground/80 hover:text-foreground transition-all duration-200 active:scale-95 border-b border-foreground/30 hover:border-foreground pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-sm"
             aria-label="Listen to my music"
           >
             Escucha mi música

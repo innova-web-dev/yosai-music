@@ -68,10 +68,10 @@ export default function Home() {
   ];
 
   const navLinks = [
-    { label: 'HOME', href: '#' },
-    { label: 'PRODUCT', href: '#' },
-    { label: 'STORE', href: '#' },
-    { label: 'ABOUT US', href: '#' },
+    { label: 'INICIO', href: '#' },
+    { label: 'MÚSICA', href: '#' },
+    { label: 'HISTORIA', href: '#' },
+    { label: 'SOBRE MÍ', href: '#' },
   ];
 
   const socialLinks = [
