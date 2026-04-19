@@ -8,7 +8,8 @@ interface MinimalistHeroProps {
   logoText: string;
   navLinks: { label: string; href: string }[];
   mainText: string;
-  readMoreLink: string;
+  ctaText?: string;
+  ctaLink?: string;
   imageSrc: string;
   imageAlt: string;
   /** Brightness as a percentage. 100 = normal, >100 = brighter, <100 = darker. Range: 0–200. */
@@ -50,7 +51,8 @@ export const MinimalistHero = ({
   logoText,
   navLinks,
   mainText,
-  readMoreLink,
+  ctaText = "Escucha mi música",
+  ctaLink = "#",
   imageSrc,
   imageAlt,
   imageBrightness = 150,
@@ -60,6 +62,17 @@ export const MinimalistHero = ({
   className,
 }: MinimalistHeroProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playTag = () => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.4;
+      audioRef.current.play().catch(() => {
+        // Ignorar errores de reproducción automática (requiere interacción)
+      });
+    }
+  };
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -72,18 +85,23 @@ export const MinimalistHero = ({
   return (
     <div
       ref={containerRef}
+      onMouseEnter={playTag}
+      onClick={playTag}
       className={cn(
         'relative flex min-h-dvh w-full flex-col items-center overflow-hidden bg-background pt-8 px-8 pb-0 font-[family-name:var(--font-inter)] md:pt-12 md:px-12 md:pb-0',
         className
       )}
     >
+      {/* Audio Branding */}
+      <audio ref={audioRef} src="/audio/producer-tag.mp3" preload="auto" />
+
       {/* Header */}
       <header className="z-30 flex w-full max-w-7xl items-center justify-between shrink-0">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-          className="font-[family-name:var(--font-anton)] text-2xl tracking-tight uppercase"
+          className="font-[family-name:var(--font-anton)] text-2xl tracking-tight uppercase text-yosai-purple-light"
         >
           {logoText}
         </motion.div>
@@ -103,9 +121,9 @@ export const MinimalistHero = ({
           aria-expanded="false"
           aria-controls="main-navigation"
         >
-          <span className="block h-0.5 w-6 bg-foreground rounded-full" aria-hidden="true"></span>
-          <span className="block h-0.5 w-6 bg-foreground rounded-full" aria-hidden="true"></span>
-          <span className="block h-0.5 w-5 bg-foreground rounded-full" aria-hidden="true"></span>
+          <span className="block h-0.5 w-6 bg-yosai-purple-light rounded-full" aria-hidden="true"></span>
+          <span className="block h-0.5 w-6 bg-yosai-purple-light rounded-full" aria-hidden="true"></span>
+          <span className="block h-0.5 w-5 bg-yosai-purple-light rounded-full" aria-hidden="true"></span>
         </motion.button>
       </header>
 
@@ -120,11 +138,11 @@ export const MinimalistHero = ({
         >
           <p className="mx-auto max-w-xs text-[13px] leading-relaxed tracking-wide text-foreground/80 md:mx-0">{mainText}</p>
           <a 
-            href={readMoreLink} 
+            href={ctaLink} 
             className="mt-5 inline-block text-xs font-semibold tracking-[0.15em] uppercase text-foreground/80 hover:text-foreground transition-all duration-200 active:scale-95 border-b border-foreground/30 hover:border-foreground pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded-sm"
-            aria-label="Listen to my music"
+            aria-label={ctaText}
           >
-            Escucha mi música
+            {ctaText}
           </a>
         </motion.div>
 
@@ -134,7 +152,7 @@ export const MinimalistHero = ({
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="absolute z-0 h-[300px] w-[300px] rounded-full bg-yellow-400/90 md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="absolute z-0 h-[300px] w-[300px] rounded-full bg-yosai-purple/30 md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
           ></motion.div>
           
           <div className="relative z-10 w-full flex justify-center items-end h-[90vh]">
@@ -154,7 +172,7 @@ export const MinimalistHero = ({
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
-                target.src = `https://placehold.co/400x600/eab308/ffffff?text=Image+Not+Found`;
+                target.src = `https://placehold.co/400x600/6d28d9/ffffff?text=Yosai+Hero`;
               }}
             />
             {/* Gradient Overlay to blend with background */}
@@ -171,7 +189,7 @@ export const MinimalistHero = ({
           transition={{ duration: 0.7, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
           className="z-40 order-3 absolute top-[35%] right-0 flex flex-col items-end text-right md:static md:top-auto md:right-auto md:z-20 md:items-center md:justify-start md:text-left md:pb-24"
         >
-          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7.5rem]">
+          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7.5rem] drop-shadow-[0_0_15px_rgba(109,40,217,0.3)]">
             {overlayText.part1}
             <br />
             {overlayText.part2}

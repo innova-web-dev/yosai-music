@@ -28,7 +28,8 @@ export default function MinimalistHeroDemo() {
                 logoText="Orion music col"
                 navLinks={navLinks}
                 mainText="Soy un artista con la esencia mexicana, con un estilo único que fusiona lo tradicional con lo moderno."
-                readMoreLink="#"
+                ctaText="Escucha mi música"
+                ctaLink="#"
                 imageSrc="/images/yosai-monocromatico.png"
                 imageAlt="A portrait of a person in a black turtleneck, in profile."
                 overlayText={{

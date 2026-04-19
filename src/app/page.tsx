@@ -12,6 +12,10 @@ import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SpotifyPlayer } from '@/components/ui/spotify-player';
+import { StorytellingSection } from '@/components/ui/storytelling-section';
+import { MusicalArsenal } from '@/components/ui/musical-arsenal';
+import { CommunityLegacy } from '@/components/ui/community-legacy';
+import { EPKSection } from '@/components/ui/epk-section';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,22 +100,29 @@ export default function Home() {
           <MinimalistHero
             logoText="Orion music col"
             navLinks={navLinks}
-            mainText="Soy un artista con la esencia mexicana, con un estilo único que fusiona lo tradicional con lo moderno."
-            readMoreLink="#"
+            mainText="Productor y artista fusionando la esencia mexicana con sonidos globales. De componer éxitos en las sombras a brillar con luz propia."
+            ctaText="Escucha  A PARÍS ahora"
+            ctaLink="https://open.spotify.com/track/6p89q6Z8K95Fm9G1V6P6V2?si=... " // Reemplazar con el link real de PARÍS
             imageSrc="https://res.cloudinary.com/dlw6fupap/image/upload/f_auto,q_auto/copy_62BEDAAE-1E45-4BFA-89D1-CB3E6A7E2305-ezgif.com-png-to-webp-converter_hcdxsd"
-            imageAlt="A portrait of a person in a black turtleneck, in profile."
+            imageAlt="Yosai en su hábitat natural, el estudio de grabación."
             overlayText={{
-              part1: 'Los corridos',
-              part2: 'del valle.',
+              part1: 'La nueva era',
+              part2: 'del corrido.',
             }}
             socialLinks={socialLinks}
             locationText="Del Valle pal mundo."
           />
         )}
 
+        <StorytellingSection />
+
+        <MusicalArsenal />
+
         <div className="relative z-10 flex flex-col items-center justify-center w-full">
           <ZoomParallax images={images} />
         </div>
+
+        <CommunityLegacy />
 
         {/* ── Spotify Player Section ──────────────────────────────── */}
         <section
@@ -125,7 +136,7 @@ export default function Home() {
                                bg-[#1DB954]/6 rounded-full blur-[120px]"
           />
 
-          {/* Section heading */}
+          {/* Section heading 
           <div className="relative z-10 text-center max-w-lg">
             <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#1DB954]/70 mb-3">
               Streaming
@@ -141,18 +152,20 @@ export default function Home() {
             </p>
           </div>
 
-          {/* The player */}
+          {/* The player
           <div className="relative z-10 w-full">
             <SpotifyPlayer
               spotifyUri="https://open.spotify.com/artist/1VCihO05p1ghQuXCvUCC3p?si=zN52V_4gS6GLWXOhY_p5mg"
               label="Álbum de Yosai en Spotify"
             />
           </div>
+        */}
         </section>
+      
 
-
-        {/* Redes y Plataformas */}
+        {/* Redes y Plataformas 
         <SocialShowcase />
+      */}
       </main>
     </div>
   );
