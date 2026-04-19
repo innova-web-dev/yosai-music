@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const StorytellingSection = () => {
   return (
@@ -18,10 +19,12 @@ export const StorytellingSection = () => {
           transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
           className="relative aspect-square lg:aspect-[4/5] overflow-hidden rounded-2xl group"
         >
-          <img 
+          <Image 
             src="/images/yosai-monocromatico.png" 
             alt="Yosai Story" 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
         </motion.div>

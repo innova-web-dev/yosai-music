@@ -1,7 +1,7 @@
 'use client';
 
 import ScrollyCanvas from '@/components/ScrollyCanvas';
-import SocialShowcase from '@/components/spatial-product-showcase';
+//import SocialShowcase from '@/components/spatial-product-showcase';
 import { Music, Headphones, Mic, Radio } from 'lucide-react';
 import { MinimalistHero } from '@/components/ui/minimalist-hero';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -11,11 +11,12 @@ import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SpotifyPlayer } from '@/components/ui/spotify-player';
+//import { SpotifyPlayer } from '@/components/ui/spotify-player';
 import { StorytellingSection } from '@/components/ui/storytelling-section';
 import { MusicalArsenal } from '@/components/ui/musical-arsenal';
 import { CommunityLegacy } from '@/components/ui/community-legacy';
-import { EPKSection } from '@/components/ui/epk-section';
+import { Footer } from '@/components/ui/footer';
+// import { EPKSection } from '@/components/ui/epk-section';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,12 +125,12 @@ export default function Home() {
 
         <CommunityLegacy />
 
-        {/* ── Spotify Player Section ──────────────────────────────── */}
+        {/* ── Spotify Player Section ──────────────────────────────── *
         <section
           aria-labelledby="spotify-section-heading"
           className="relative w-full bg-[#050505] py-20 px-6 flex flex-col items-center gap-10 overflow-hidden"
         >
-          {/* Subtle Spotify-green ambient glow */}
+          {/* Subtle Spotify-green ambient glow *
           <div
             aria-hidden="true"
             className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px]
@@ -159,14 +160,15 @@ export default function Home() {
               label="Álbum de Yosai en Spotify"
             />
           </div>
-        */}
+        
         </section>
-      
+      */}
 
         {/* Redes y Plataformas 
         <SocialShowcase />
       */}
       </main>
+      <Footer />
     </div>
   );
 };
