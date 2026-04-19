@@ -11,6 +11,7 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-righteous);
   --font-inter: var(--font-inter);
+  --font-anton: var(--font-anton);
   --font-bebas: 'Bebas Neue', var(--font-anton), sans-serif;
   
   --color-crimson: #E11D48;

@@ -31,6 +31,7 @@ const mobileScales  = [2.5, 3.5, 4, 3.5, 4, 5, 6];
 export function ZoomParallax({ images }: ZoomParallaxProps) {
 	const container = useRef<HTMLDivElement>(null);
 	const imagesRefs = useRef<(HTMLDivElement | null)[]>([]);
+	const textRef = useRef<HTMLDivElement>(null);
 
 	// Check reduced motion preference once at component creation
 	const prefersReducedMotion = useMemo(() => {
@@ -66,6 +67,14 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 			}
 		});
 
+		if (textRef.current) {
+			tl.fromTo(textRef.current, 
+				{ opacity: 0, y: 50, scale: 0.8 },
+				{ opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power2.out' },
+				0.1 // Start slightly after the scroll begins
+			);
+		}
+
 		return () => tl.kill();
 	}, { scope: container });
 
@@ -98,6 +107,13 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 								priority={index < 3}
 								quality={200}
 							/>
+							{index === 0 && (
+								<div className="absolute inset-0 z-20 flex items-center justify-end pointer-events-none pr-6 md:pr-12 text-right">
+									<span className="text-white text-2xl md:text-3xl font-anton uppercase tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-w-[150px] md:max-w-[250px] leading-tight">
+										La vamos a coronar mi apá
+									</span>
+								</div>
+							)}
 						</div>
 					))}
 				</div>
@@ -138,6 +154,16 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 									priority={index < 3}
 									quality={200}
 								/>
+								{index === 0 && (
+									<div 
+										ref={textRef}
+										className="absolute inset-0 z-20 flex items-center justify-end pointer-events-none pr-6 md:pr-12 text-right opacity-0"
+									>
+										<span className="text-white text-2xl md:text-3xl font-anton uppercase tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-w-[120px] md:max-w-[200px] leading-tight">
+											La vamos a coronar mi apá
+										</span>
+									</div>
+								)}
 							</div>
 						</div>
 					);
