@@ -94,7 +94,9 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 								alt={alt || `Gallery image ${index + 1}`}
 								fill
 								className="object-cover"
-								sizes={index === 0 ? "100vw" : "(max-width: 768px) 50vw, 33vw"}
+								sizes="200vw"
+								priority={index < 3}
+								quality={200}
 							/>
 						</div>
 					))}
@@ -113,7 +115,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 						<div
 							key={index}
 							ref={(el) => { imagesRefs.current[index] = el; }}
-							className="absolute top-0 flex h-full w-full items-center justify-center will-change-transform"
+							className="absolute top-0 flex h-full w-full items-center justify-center"
 							style={{ zIndex: 10 + index }}
 						>
 							<div className={cn(
@@ -132,8 +134,9 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 									alt={descriptiveAlt}
 									fill
 									className="object-cover"
-									sizes={index === 0 ? "100vw" : "(max-width: 768px) 50vw, 33vw"}
-									priority={index === 0}
+									sizes="200vw"
+									priority={index < 3}
+									quality={200}
 								/>
 							</div>
 						</div>

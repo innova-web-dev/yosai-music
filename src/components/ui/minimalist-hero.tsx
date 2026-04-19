@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -59,15 +59,26 @@ export const MinimalistHero = ({
   locationText,
   className,
 }: MinimalistHeroProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
   return (
     <div
+      ref={containerRef}
       className={cn(
-        'relative flex min-h-dvh w-full flex-col items-center justify-between overflow-hidden bg-background-foreground p-8 font-[family-name:var(--font-inter)] md:p-12',
+        'relative flex min-h-dvh w-full flex-col items-center overflow-hidden bg-background pt-8 px-8 pb-0 font-[family-name:var(--font-inter)] md:pt-12 md:px-12 md:pb-0',
         className
       )}
     >
       {/* Header */}
-      <header className="z-30 flex w-full max-w-7xl items-center justify-between">
+      <header className="z-30 flex w-full max-w-7xl items-center justify-between shrink-0">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -99,13 +110,13 @@ export const MinimalistHero = ({
       </header>
 
       {/* Main Content Area */}
-      <div className="relative grid w-full max-w-7xl flex-1 grid-cols-1 items-center md:grid-cols-3">
+      <div className="relative grid w-full max-w-7xl flex-1 grid-cols-1 items-center md:grid-cols-3 h-full z-10">
         {/* Left Text Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-          className="z-20 order-2 md:order-1 text-center md:text-left"
+          className="z-20 order-2 md:order-1 text-center md:text-left md:pb-24"
         >
           <p className="mx-auto max-w-xs text-[13px] leading-relaxed tracking-wide text-foreground/80 md:mx-0">{mainText}</p>
           <a 
@@ -118,27 +129,39 @@ export const MinimalistHero = ({
         </motion.div>
 
         {/* Center Image with Circle */}
-        <div className="relative order-1 md:order-2 flex justify-center items-center h-full">
+        <div className="relative order-1 md:order-2 flex justify-center items-end h-full min-h-[50vh] md:min-h-0">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="absolute z-0 h-[300px] w-[300px] rounded-full bg-yellow-400/90 md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px]"
+            className="absolute z-0 h-[300px] w-[300px] rounded-full bg-yellow-400/90 md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           ></motion.div>
-          <motion.img
-            src={imageSrc}
-            alt={imageAlt}
-            className="relative z-10 h-auto w-80 object-cover md:w-180 scale-150 lg:w-180"
-            style={{ filter: `brightness(${imageBrightness}%)` }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.src = `https://placehold.co/400x600/eab308/ffffff?text=Image+Not+Found`;
-            }}
-          />
+          
+          <div className="relative z-10 w-full flex justify-center items-end h-[90vh]">
+            <motion.img
+              src={imageSrc}
+              alt={imageAlt}
+              className="h-full w-auto object-contain max-w-none md:max-w-20xl"
+              style={{ 
+                filter: `brightness(${imageBrightness}%)`,
+                y,
+                opacity,
+                scale
+              }}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = `https://placehold.co/400x600/eab308/ffffff?text=Image+Not+Found`;
+              }}
+            />
+            {/* Gradient Overlay to blend with background */}
+            <div 
+              className="absolute left-1/2 -translate-x-1/2 bottom-0 bg-gradient-to-t from-background via-background/90 via-background/40 to-transparent pointer-events-none h-[40%] w-[200vw] z-20"
+            />
+          </div>
         </div>
 
         {/* Right Text (Big Overlay) */}
@@ -146,9 +169,9 @@ export const MinimalistHero = ({
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
-          className="z-40 order-3 absolute top-[40%] right-6 flex flex-col items-end text-right md:static md:top-auto md:right-auto md:z-20 md:items-center md:justify-start md:text-left"
+          className="z-40 order-3 absolute top-[35%] right-0 flex flex-col items-end text-right md:static md:top-auto md:right-auto md:z-20 md:items-center md:justify-start md:text-left md:pb-24"
         >
-          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7rem]">
+          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7.5rem]">
             {overlayText.part1}
             <br />
             {overlayText.part2}
@@ -157,12 +180,12 @@ export const MinimalistHero = ({
       </div>
 
       {/* Footer Elements */}
-      <footer className="z-30 flex w-full max-w-7xl items-center justify-between">
+      <footer className="absolute bottom-8 md:bottom-12 left-8 md:left-12 right-8 md:right-12 z-50 flex items-center justify-between pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.2 }}
-          className="flex items-center space-x-4"
+          className="flex items-center space-x-4 pointer-events-auto"
         >
           {socialLinks.map((link, index) => (
             <SocialIcon key={index} href={link.href} icon={link.icon} />
@@ -172,7 +195,7 @@ export const MinimalistHero = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.3 }}
-          className="text-sm font-medium text-foreground/80"
+          className="text-sm font-medium text-foreground/80 pointer-events-auto"
         >
           {locationText}
         </motion.div>
