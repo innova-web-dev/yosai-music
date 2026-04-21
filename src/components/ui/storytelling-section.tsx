@@ -3,10 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { localImages, images } from '@/lib/images';
 
 export const StorytellingSection = () => {
+  const storyImage = images[9].src; // "StorytellingSection (La Narrativa Íntima)" - Very dark/moody
+
   return (
-    <section className="relative w-full py-24 px-8 bg-background overflow-hidden">
+    <section className="relative w-full min-h-screen flex items-center py-24 px-8 bg-background overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yosai-purple/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       
@@ -20,13 +23,13 @@ export const StorytellingSection = () => {
           className="relative aspect-square lg:aspect-[4/5] overflow-hidden rounded-2xl group"
         >
           <Image 
-            src="/images/yosai-monocromatico.png" 
+            src={storyImage} 
             alt="Yosai Story" 
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
         </motion.div>
 
         {/* Content Side */}

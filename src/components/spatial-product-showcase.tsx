@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { localImages, icons } from '@/lib/images';
 
 // =========================================
 // TYPES & DATA ARCHITECTURE
@@ -24,12 +25,12 @@ const SOCIAL_DATA: Record<SectionId, {
     label: 'Plataformas',
     title: 'Escucha mi música',
     description: 'Los corridos más duros disponibles en todas las plataformas de streaming de alta fidelidad.',
-    image: '/images/yosaiplataforma-sinfondo.webp',
+    image: localImages.plataforma,
     glowColor: 'bg-blue-600/50', // Azul eléctrico/tecnológico para streaming
     items: [
-      { label: 'Spotify', logo: '/icons/spotify.png', link: '#', floatDelay: 0 },
-      { label: 'YouTube', logo: '/icons/youtube.png', link: '#', floatDelay: 1.2 },
-      { label: 'Apple Music', logo: '/icons/apple.png', link: '#', floatDelay: 0.6 },
+      { label: 'Spotify', logo: icons.spotify, link: '#', floatDelay: 0 },
+      { label: 'YouTube', logo: icons.youtube, link: '#', floatDelay: 1.2 },
+      { label: 'Apple Music', logo: icons.apple, link: '#', floatDelay: 0.6 },
     ],
   },
   redes: {
@@ -37,12 +38,12 @@ const SOCIAL_DATA: Record<SectionId, {
     label: 'Social Media',
     title: 'Conecta conmigo',
     description: 'El día a día, procesos creativos en el estudio y los avisos de los próximos eventos.',
-    image: '/images/yosairedes-sinfondo.webp',
+    image: localImages.redes,
     glowColor: 'bg-red-600/50', // Rojo intenso/pasional para la conexión social
     items: [
-      { label: 'Instagram', logo: '/icons/instagram_icon.png', link: '#', floatDelay: 0.3 },
-      { label: 'Facebook', logo: '/icons/facebook.png', link: '#', floatDelay: 0.9 },
-      { label: 'Contacto', logo: '/icons/contacto.png', link: '#', floatDelay: 1.5 },
+      { label: 'Instagram', logo: icons.instagramAlt, link: '#', floatDelay: 0.3 },
+      { label: 'Facebook', logo: icons.facebook, link: '#', floatDelay: 0.9 },
+      { label: 'Contacto', logo: icons.contacto, link: '#', floatDelay: 1.5 },
     ],
   },
 };

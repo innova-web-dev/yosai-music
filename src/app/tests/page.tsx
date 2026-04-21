@@ -6,6 +6,7 @@ import { MinimalistHero } from '@/components/ui/minimalist-hero';
 import { HeroScrollDemo } from '@/components/ui/hero-scroll-demo';
 import SocialShowcase from '@/components/spatial-product-showcase';
 import { SpotifyPlayer } from '@/components/ui/spotify-player';
+import { localImages } from '@/lib/images';
 
 export default function MinimalistHeroDemo() {
     const navLinks = [
@@ -30,7 +31,7 @@ export default function MinimalistHeroDemo() {
                 mainText="Soy un artista con la esencia mexicana, con un estilo único que fusiona lo tradicional con lo moderno."
                 ctaText="Escucha mi música"
                 ctaLink="#"
-                imageSrc="/images/yosai-monocromatico.png"
+                imageSrc={localImages.monocromatico}
                 imageAlt="A portrait of a person in a black turtleneck, in profile."
                 overlayText={{
                     part1: 'Los corridos',

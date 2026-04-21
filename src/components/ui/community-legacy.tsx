@@ -15,7 +15,7 @@ export const CommunityLegacy = () => {
   };
 
   return (
-    <section className="relative w-full py-80 px-8 bg-background overflow-hidden border-t border-white/5">
+    <section className="relative w-full min-h-screen flex items-center py-24 px-8 bg-background overflow-hidden border-t border-white/5">
       <div className="max-w-3xl mx-auto text-center">
         
         {/* Newsletter Section */}

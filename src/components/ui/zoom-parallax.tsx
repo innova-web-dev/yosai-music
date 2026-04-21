@@ -143,13 +143,13 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 								index === 3 ? 'top-[10vh] -left-[35vw] w-[30vw] h-[28vh] md:top-0 md:left-[27.5vw] md:h-[25vh] md:w-[25vw]' : '',
 								index === 4 ? 'top-[15vh] left-[30vw] w-[35vw] h-[32vh] md:top-[27.5vh] md:left-[5vw] md:h-[25vh] md:w-[20vw]' : '',
 								index === 5 ? 'top-[35vh] -left-[20vw] w-[35vw] h-[30vh] md:top-[27.5vh] md:-left-[22.5vw] md:h-[25vh] md:w-[30vw]' : '',
-								index === 6 ? 'top-[30vh] left-[25vw] w-[30vw] h-[28vh] md:top-[22.5vh] md:left-[25vw] md:h-[15vh] md:w-[15vw]' : ''
+								index === 6 ? 'top-[30vh] left-[25vw] w-[30vw] h-[28vh] md:top-[27.7vh] md:left-[25vw] md:h-[25.5vh] md:w-[15vw]' : ''
 							)}>
 								<Image
 									src={src || '/placeholder.svg'}
 									alt={descriptiveAlt}
 									fill
-									className="object-cover"
+									className="object-cover object-top"
 									sizes="200vw"
 									priority={index < 3}
 									quality={200}

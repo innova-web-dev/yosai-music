@@ -43,7 +43,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full bg-black border-t border-zinc-800/50 pt-20 pb-10 px-6 overflow-hidden">
+    <footer className="relative w-full bg-background border-t border-zinc-800/50 pt-20 pb-10 px-6 overflow-hidden">
       {/* Ambient Glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[300px] bg-crimson/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none" />

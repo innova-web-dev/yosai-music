@@ -14,10 +14,10 @@
   --font-anton: var(--font-anton);
   --font-bebas: 'Bebas Neue', var(--font-anton), sans-serif;
   
-  --color-crimson: #E11D48;
+  --color-crimson: #82000F;
   --color-neon-blue: #00D4FF;
-  --color-yosai-purple: #6D28D9;
-  --color-yosai-purple-light: #8B5CF6;
+  --color-yosai-purple: #82000F;
+  --color-yosai-purple-light: #A30015;
   
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -110,7 +110,7 @@
   --card-foreground: oklch(1 0 0);
   --popover: oklch(0 0 0);
   --popover-foreground: oklch(1 0 0);
-  --primary: oklch(0.577 0.245 27.325);
+  --primary: oklch(0.42 0.25 25);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.205 0 0);
   --secondary-foreground: oklch(1 0 0);
@@ -118,19 +118,19 @@
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.205 0 0);
   --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.42 0.25 25);
   --border: oklch(0.205 0 0);
   --input: oklch(0.205 0 0);
-  --ring: oklch(0.577 0.245 27.325);
+  --ring: oklch(0.42 0.25 25);
   --radius: 0.625rem;
 }
 
 @utility neon-text {
-  text-shadow: 0 0 10px #E11D48, 0 0 20px #E11D48;
+  text-shadow: 0 0 10px #82000F, 0 0 20px #82000F;
 }
 
 @utility glow-red {
-  background: radial-gradient(circle at bottom left, #E11D48 0%, transparent 60%);
+  background: radial-gradient(circle at bottom left, #82000F 0%, transparent 60%);
 }
 
 @utility glow-blue {
@@ -138,7 +138,7 @@
 }
 
 @utility btn-crimson {
-  @apply bg-crimson shadow-[0_0_15px_rgba(225,29,72,0.6)] transition-all duration-300 ease-in-out hover:bg-[#FF003C] hover:scale-105;
+  @apply bg-crimson shadow-[0_0_15px_rgba(130,0,15,0.6)] transition-all duration-300 ease-in-out hover:bg-[#A30015] hover:scale-105;
 }
 
 @utility btn-outline-blue {

@@ -189,7 +189,7 @@ export const MinimalistHero = ({
           transition={{ duration: 0.7, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
           className="z-40 order-3 absolute top-[35%] right-0 flex flex-col items-end text-right md:static md:top-auto md:right-auto md:z-20 md:items-center md:justify-start md:text-left md:pb-24"
         >
-          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7.5rem] drop-shadow-[0_0_15px_rgba(109,40,217,0.3)]">
+          <h1 className="font-[family-name:var(--font-anton)] text-[2.5rem] uppercase leading-none tracking-tight text-foreground md:text-[4rem] lg:text-[7.5rem] drop-shadow-[0_0_15px_rgba(130,0,15,0.3)]">
             {overlayText.part1}
             <br />
             {overlayText.part2}

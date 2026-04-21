@@ -18,6 +18,8 @@ import { CommunityLegacy } from '@/components/ui/community-legacy';
 import { Footer } from '@/components/ui/footer';
 // import { EPKSection } from '@/components/ui/epk-section';
 
+import { localImages, images as assetImages } from '@/lib/images';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -43,32 +45,32 @@ export default function Home() {
 
   const images = [
     {
-      src: '/images/yosai1.jpeg',
+      src: assetImages[10].src,
       alt: 'yosai colores',
     },
     {
-      src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Urban cityscape at sunset',
+      src: assetImages[6].src, // "ZoomParallax (La Vida en Movimiento)" - ID 7
+      alt: 'yosai movimiento 1',
     },
     {
-      src: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&h=800&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Abstract geometric pattern',
+      src: assetImages[1].src, // "El Legado" - ID 2
+      alt: 'yosai legado',
     },
     {
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Mountain landscape',
+      src: assetImages[7].src, // "ZoomParallax (La Vida en Movimiento) 2" - ID 8
+      alt: 'yosai movimiento 2',
     },
     {
-      src: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=800&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Minimalist design elements',
+      src: assetImages[2].src, // "El Backstage" - ID 3
+      alt: 'yosai backstage',
     },
     {
-      src: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Ocean waves and beach',
+      src: assetImages[8].src, // "ZoomParallax (La Vida en Movimiento) 3" - ID 9
+      alt: 'yosai movimiento 3',
     },
     {
-      src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=80',
-      alt: 'Forest trees and sunlight',
+      src: assetImages[4].src, // "El Origen" - ID 5
+      alt: 'yosai origen',
     },
   ];
 
@@ -104,7 +106,7 @@ export default function Home() {
             mainText="Productor y artista fusionando la esencia mexicana con sonidos globales. De componer éxitos en las sombras a brillar con luz propia."
             ctaText="Escucha  A PARÍS ahora"
             ctaLink="https://open.spotify.com/track/6p89q6Z8K95Fm9G1V6P6V2?si=... " // Reemplazar con el link real de PARÍS
-            imageSrc="https://res.cloudinary.com/dlw6fupap/image/upload/f_auto,q_auto/copy_62BEDAAE-1E45-4BFA-89D1-CB3E6A7E2305-ezgif.com-png-to-webp-converter_hcdxsd"
+            imageSrc={localImages.hero}
             imageAlt="Yosai en su hábitat natural, el estudio de grabación."
             overlayText={{
               part1: 'La nueva era',
@@ -119,7 +121,7 @@ export default function Home() {
 
         <MusicalArsenal />
 
-        <div className="relative z-10 flex flex-col items-center justify-center w-full">
+        <div className="relative z-10 w-full ">
           <ZoomParallax images={images} />
         </div>
 

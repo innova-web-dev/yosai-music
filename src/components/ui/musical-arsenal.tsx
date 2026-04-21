@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, ExternalLink, Disc } from 'lucide-react';
+import { videos } from '@/lib/images';
 
 const RELEASES = [
   { 
@@ -10,7 +11,7 @@ const RELEASES = [
     title: 'PARÍS', 
     type: 'Sencillo', 
     date: 'Abril 2026',
-    video: '/images/yosai-animation.mp4',
+    video: videos.animation,
     spotify: 'https://open.spotify.com/track/6p89q6Z8K95Fm9G1V6P6V2?si=...',
     description: 'El nuevo himno que redefine el corrido moderno con toques de elegancia europea.'
   },
@@ -19,7 +20,7 @@ const RELEASES = [
     title: 'De las Sombras', 
     type: 'Sencillo', 
     date: 'Marzo 2026',
-    video: '/images/yosaivideo.mp4',
+    video: videos.video,
     spotify: '#',
     description: 'Una mirada cruda a los inicios y la resiliencia en la industria musical.'
   },
@@ -28,7 +29,7 @@ const RELEASES = [
     title: 'Del Valle pal Mundo', 
     type: 'EP', 
     date: 'Enero 2026',
-    video: '/images/yosaianimacion2.mp4',
+    video: videos.animacion2,
     spotify: '#',
     description: 'El EP debut que puso a Yosai en el mapa global de la música urbana.'
   },
@@ -38,7 +39,7 @@ export const MusicalArsenal = () => {
   const [activeRelease, setActiveRelease] = useState(RELEASES[0]);
 
   return (
-    <section className="relative w-full py-24 px-8 bg-[#050505] overflow-hidden">
+    <section className="relative w-full min-h-screen flex items-center py-24 px-8 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Header */}
         <div className="text-center mb-16">
@@ -62,7 +63,7 @@ export const MusicalArsenal = () => {
                 onClick={() => setActiveRelease(release)}
                 className={`flex items-center space-x-4 p-6 rounded-2xl transition-all duration-300 group ${
                   activeRelease.id === release.id 
-                    ? 'bg-yosai-purple text-white shadow-[0_0_30px_rgba(109,40,217,0.3)]' 
+                    ? 'bg-yosai-purple text-white shadow-[0_0_30px_rgba(130,0,15,0.3)]' 
                     : 'bg-white/[0.03] text-zinc-500 hover:bg-white/[0.05] hover:text-zinc-300'
                 }`}
               >
@@ -125,7 +126,7 @@ export const MusicalArsenal = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-yosai-purple rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(109,40,217,0.5)]">
+                    <div className="w-12 h-12 bg-yosai-purple rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(130,0,15,0.5)]">
                       <Play size={20} fill="white" className="text-white ml-1" />
                     </div>
                     <div>
