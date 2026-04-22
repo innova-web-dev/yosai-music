@@ -8,7 +8,7 @@ import { videos } from '@/lib/images';
 const RELEASES = [
   { 
     id: 'paris', 
-    title: 'PARÍS', 
+    title: 'A PARÍS', 
     type: 'Sencillo', 
     date: 'Abril 2026',
     video: videos.animation,
@@ -23,16 +23,7 @@ const RELEASES = [
     video: videos.video,
     spotify: '#',
     description: 'Una mirada cruda a los inicios y la resiliencia en la industria musical.'
-  },
-  { 
-    id: 'valle', 
-    title: 'Del Valle pal Mundo', 
-    type: 'EP', 
-    date: 'Enero 2026',
-    video: videos.animacion2,
-    spotify: '#',
-    description: 'El EP debut que puso a Yosai en el mapa global de la música urbana.'
-  },
+  }
 ];
 
 export const MusicalArsenal = () => {

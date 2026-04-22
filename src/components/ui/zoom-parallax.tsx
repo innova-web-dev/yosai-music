@@ -17,6 +17,7 @@ interface ImageProps {
 interface ZoomParallaxProps {
 	/** Array of images to be displayed in the parallax effect max 7 images */
 	images: ImageProps[];
+	title : string;
 }
 
 const desktopScales = [4, 5, 6, 5, 6, 8, 9];
@@ -28,7 +29,7 @@ const mobileScales  = [2.5, 3.5, 4, 3.5, 4, 5, 6];
  * - Prevents CLS with aspect-ratio containers
  * - Provides descriptive alt text for screen readers
  */
-export function ZoomParallax({ images }: ZoomParallaxProps) {
+export function ZoomParallax({ images , title}: ZoomParallaxProps) {
 	const container = useRef<HTMLDivElement>(null);
 	const imagesRefs = useRef<(HTMLDivElement | null)[]>([]);
 	const textRef = useRef<HTMLDivElement>(null);
@@ -110,7 +111,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 							{index === 0 && (
 								<div className="absolute inset-0 z-20 flex items-center justify-end pointer-events-none pr-6 md:pr-12 text-right">
 									<span className="text-white text-2xl md:text-3xl font-anton uppercase tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-w-[150px] md:max-w-[250px] leading-tight">
-										La vamos a coronar mi apá
+										{title}
 									</span>
 								</div>
 							)}
@@ -160,7 +161,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 										className="absolute inset-0 z-20 flex items-center justify-end pointer-events-none pr-6 md:pr-12 text-right opacity-0"
 									>
 										<span className="text-white text-2xl md:text-3xl font-anton uppercase tracking-tighter drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-w-[120px] md:max-w-[200px] leading-tight">
-											La vamos a coronar mi apá
+											{title}
 										</span>
 									</div>
 								)}

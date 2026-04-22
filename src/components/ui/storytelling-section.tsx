@@ -1,9 +1,7 @@
 'use client';
-
-import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { localImages, images } from '@/lib/images';
+import { images } from '@/lib/images';
 
 export const StorytellingSection = () => {
   const storyImage = images[9].src; // "StorytellingSection (La Narrativa Íntima)" - Very dark/moody
@@ -13,7 +11,7 @@ export const StorytellingSection = () => {
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yosai-purple/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Visual Side */}
         <motion.div 
           initial={{ opacity: 0, x: -50 }}

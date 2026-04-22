@@ -121,9 +121,17 @@ export default function Home() {
 
         <MusicalArsenal />
 
-        <div className="relative z-10 w-full ">
-          <ZoomParallax images={images} />
-        </div>
+        {isMobile ? (
+          <div className="relative z-10 w-full">
+            <ZoomParallax images={images} title={"ahí nomás a la verga"} />
+          </div>
+        ): (
+          <div className="relative z-10 w-full bg-black">
+            <ZoomParallax images={images} title={"ahí nomás a la verga"} />
+          </div>
+        )}
+
+        
 
         <CommunityLegacy />
 
