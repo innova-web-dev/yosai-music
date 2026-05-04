@@ -28,7 +28,7 @@ const footerLinks = {
   ],
   legal: [
     { name: 'Política de Privacidad', href: '#' },
-    { name: 'Términos de Servicio', href: '#' },
+    { name: 'Términos de Servicio', href: '/terminos' },
     { name: 'Cookies', href: '#' },
   ],
   social: [
