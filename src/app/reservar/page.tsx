@@ -53,10 +53,10 @@ export default function ReservarPage() {
   if (isMobile === null) return null;
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col bg-[#050505]">
       <div className="film-grain" aria-hidden="true" />
 
-      <main className="relative w-full selection:bg-white selection:text-black">
+      <main className="relative w-full selection:bg-crimson selection:text-white">
         <BookingHero
           imageSrc={localImages.hero}
           imageAlt="Yosai — Reserva para tu evento"

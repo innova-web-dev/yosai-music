@@ -2,7 +2,14 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, Video, AlertCircle } from 'lucide-react';
+import {
+  CalendarBlank,
+  Clock,
+  VideoCamera,
+  WarningCircle,
+} from '@phosphor-icons/react';
+
+const springTransition = { type: 'spring' as const, stiffness: 100, damping: 20 };
 
 interface CalendarSectionProps {
   calendlyUrl?: string;
@@ -16,124 +23,120 @@ export function CalendarSection({
   return (
     <section
       id="calendario"
-      className="relative w-full py-24 md:py-32 px-6 md:px-8 bg-[#020202] overflow-hidden border-t border-white/5"
+      className="relative w-full py-32 md:py-40 px-6 md:px-8 bg-[#050505] overflow-hidden border-t border-white/[0.04]"
       aria-labelledby="calendar-section-heading"
     >
-      {/* Ambient Glows */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[600px] h-[500px] bg-crimson/8 blur-[180px] pointer-events-none"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 w-[500px] h-[400px] bg-neon-blue/3 blur-[150px] pointer-events-none"
-      />
-
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+          transition={springTransition}
           className="text-center mb-14"
         >
-          <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-yosai-purple-light mb-4">
-            Agenda tu Llamada
-          </p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.06] bg-white/[0.02] mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-yosai-purple-light" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+              Agenda tu Llamada
+            </span>
+          </div>
           <h2
             id="calendar-section-heading"
-            className="text-4xl md:text-6xl font-black uppercase leading-none tracking-tighter text-white mb-6"
+            className="text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.95] tracking-tighter text-white mb-6"
           >
             Hablemos de{' '}
-            <span className="text-yosai-purple-light neon-text">tu evento</span>
+            <span className="text-yosai-purple-light">tu evento</span>
           </h2>
-          <p className="text-sm md:text-base text-zinc-400 max-w-lg mx-auto leading-relaxed">
+          <p className="text-sm md:text-base text-white/35 max-w-lg mx-auto leading-relaxed">
             Selecciona un horario que te funcione. En la llamada revisaremos
-            fechas, riders, logística y presupuesto para tu evento.
+            fechas, riders, logistica y presupuesto.
           </p>
         </motion.div>
 
-        {/* Info Cards */}
+        {/* Info Islands */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10"
+          transition={{ ...springTransition, delay: 0.1 }}
+          className="flex flex-wrap justify-center gap-3 mb-10"
         >
           {[
             {
               icon: Clock,
               title: '30 Minutos',
-              desc: 'Llamada de negociación rápida y directa.',
+              desc: 'Llamada de negociacion rapida y directa.',
             },
             {
-              icon: Video,
+              icon: VideoCamera,
               title: 'Zoom / Meet',
               desc: 'Link enviado al confirmar la reserva.',
             },
             {
-              icon: Calendar,
+              icon: CalendarBlank,
               title: 'Disponible',
-              desc: 'Lun-Vie, 10:00 - 18:00 (CDMX).',
+              desc: 'Lun–Vie, 10:00 – 18:00 (CDMX).',
             },
           ].map((item) => (
             <div
               key={item.title}
-              className="flex items-start gap-3 p-4 rounded-2xl border border-white/5 bg-white/[0.01]"
+              className="flex items-start gap-3 px-5 py-4 rounded-2xl border border-white/[0.05] bg-[#0a0a0a]"
             >
-              <div className="w-10 h-10 rounded-xl bg-crimson/10 border border-crimson/20 flex items-center justify-center text-yosai-purple-light shrink-0">
-                <item.icon size={18} />
+              <div className="w-9 h-9 rounded-xl bg-crimson/[0.06] border border-crimson/[0.10] flex items-center justify-center text-yosai-purple-light shrink-0">
+                <item.icon size={17} weight="light" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-white">
+                <p className="text-xs font-semibold text-white/70">
                   {item.title}
                 </p>
-                <p className="text-[11px] text-zinc-500 mt-0.5">{item.desc}</p>
+                <p className="text-[11px] text-white/30 mt-0.5">{item.desc}</p>
               </div>
             </div>
           ))}
         </motion.div>
 
-        {/* Calendly Embed */}
+        {/* Calendly Embed — Double-Bezel wrapper */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-          className="relative rounded-3xl border border-crimson/20 bg-black/60 backdrop-blur-xl overflow-hidden shadow-[0_0_60px_rgba(130,0,15,0.15)]"
+          transition={{ ...springTransition, delay: 0.2 }}
         >
-          {/* Skeleton Loader */}
-          {isLoading && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/80">
-              <div className="w-12 h-12 rounded-full border-2 border-crimson/30 border-t-crimson animate-spin mb-6" />
-              <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">
-                Cargando calendario...
-              </p>
-            </div>
-          )}
+          <div className="p-[1px] rounded-[1.75rem] bg-white/[0.04]">
+            <div className="relative rounded-[calc(1.75rem-1px)] overflow-hidden bg-[#0a0a0a] border border-white/[0.05] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+              {/* Skeleton Loader */}
+              {isLoading && (
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#0a0a0a]/90">
+                  <div className="w-10 h-10 rounded-full border border-crimson/[0.15] border-t-crimson/50 animate-spin mb-5" />
+                  <p className="text-[10px] text-white/25 uppercase tracking-[0.2em] font-medium">
+                    Cargando calendario...
+                  </p>
+                </div>
+              )}
 
-          <iframe
-            src={calendlyUrl}
-            width="100%"
-            height="720"
-            frameBorder="0"
-            title="Agendar llamada con Yosai Music"
-            className="w-full bg-transparent"
-            onLoad={() => setIsLoading(false)}
-            style={{ minHeight: '720px' }}
-          />
+              <iframe
+                src={calendlyUrl}
+                width="100%"
+                height="720"
+                frameBorder="0"
+                title="Agendar llamada con Yosai Music"
+                className="w-full bg-transparent"
+                onLoad={() => setIsLoading(false)}
+                style={{ minHeight: '720px' }}
+              />
+            </div>
+          </div>
         </motion.div>
 
-        {/* Note */}
-        <div className="mt-8 flex items-start gap-3 p-4 rounded-2xl border border-neon-blue/10 bg-neon-blue/[0.02]">
-          <AlertCircle size={14} className="text-neon-blue mt-0.5 shrink-0" />
-          <p className="text-[11px] text-zinc-500 leading-relaxed">
-            ¿No encuentras un horario que funcione? Escríbenos directamente a{' '}
+        {/* Fallback Note */}
+        <div className="mt-8 flex items-start gap-3 px-5 py-4 rounded-2xl border border-white/[0.04] bg-[#0a0a0a]">
+          <WarningCircle size={14} weight="light" className="text-white/20 mt-0.5 shrink-0" />
+          <p className="text-[11px] text-white/25 leading-relaxed">
+            No encuentras un horario que funcione? Escribenos directamente a{' '}
             <a
               href="mailto:booking@orionmusic.com"
-              className="text-neon-blue hover:underline"
+              className="text-white/45 hover:text-white/70 underline underline-offset-4 transition-colors"
             >
               booking@orionmusic.com
             </a>{' '}
